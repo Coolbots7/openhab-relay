@@ -4,15 +4,14 @@ const axios = require('axios');
 const qs = require('qs');
 
 const PORT = process.env.PORT || 3000;
+const OPENHAB_URL = process.env.OPENHAB_URL || "http://openhab.cb7.com";
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const OPENHAB_URL = "http://openhab.cb7.com:8080/rest/";
-
 function updateOpenHabItem(item, state) {
     axios.post(
-        OPENHAB_URL + "items/" + item,
+        OPENHAB_URL + "/rest/items/" + item,
         state,
         {
             headers: {
