@@ -20,21 +20,22 @@ function updateOpenHabItem(item, state) {
             }
         }
     )
-}
+};
+
+function updateOpenHabItemRequest(req, res) {
+    const item = req.params.item;
+    const body = req.query.state;
+
+    updateOpenHabItem(item, body);
+};
 
 app.get('/', function (req, res) {
     return res.send('Hello world');
 });
 
-app.put('/rest/items/:item', (req, res) => {
-    const item = req.params.item;
-    const body = req.query.state;
+app.put('/rest/items/:item', updateOpenHabItemRequest);
 
-    console.log("item", item);
-    console.log("body", body);
-
-    updateOpenHabItem(item, body);
-});
+app.post('/rest/items/:item', updateOpenHabItemRequest);
 
 app.listen(PORT, function() {
     console.log(`Listening on port ${PORT}`);
