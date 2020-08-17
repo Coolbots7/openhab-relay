@@ -18,7 +18,7 @@ function updateOpenHabItem(item, state) {
                 'Content-Type': 'text/plain'
             }
         }
-    )
+    );
 };
 
 function updateOpenHabItemRequest(req, res) {
@@ -26,6 +26,8 @@ function updateOpenHabItemRequest(req, res) {
     const body = req.query.state;
 
     updateOpenHabItem(item, body);
+
+    res.status(200).send("OK");
 };
 
 app.get('/', function (req, res) {
